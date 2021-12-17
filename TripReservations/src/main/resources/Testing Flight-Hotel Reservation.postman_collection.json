@@ -1,0 +1,373 @@
+{
+	"info": {
+		"_postman_id": "7a890566-bbbc-4adc-9406-18c0a5a48da1",
+		"name": "Testing Flight/Hotel Reservation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "emptyParamHotels",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/hotels",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"hotels"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "emptyParamFlights",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/flights",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"flights"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NoHotels",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/hotels?dateFrom=24/01/2022&dateTo=26/01/2022&destination=Tucumán",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"hotels"
+					],
+					"query": [
+						{
+							"key": "dateFrom",
+							"value": "24/01/2022"
+						},
+						{
+							"key": "dateTo",
+							"value": "26/01/2022"
+						},
+						{
+							"key": "destination",
+							"value": "Tucumán"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ValidHotels",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/hotels?dateFrom=3/1/2022&dateTo=04/05/2023&destination=Medellín",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"hotels"
+					],
+					"query": [
+						{
+							"key": "dateFrom",
+							"value": "3/1/2022"
+						},
+						{
+							"key": "dateTo",
+							"value": "04/05/2023"
+						},
+						{
+							"key": "destination",
+							"value": "Medellín"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MissingParamHotels",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/hotels?dateFrom=3/1/2022&dateTo=04/05/2023",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"hotels"
+					],
+					"query": [
+						{
+							"key": "dateFrom",
+							"value": "3/1/2022"
+						},
+						{
+							"key": "dateTo",
+							"value": "04/05/2023"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ValidFlight",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/flights?dateFrom=2/11/2022&dateTo=2/14/2022&destination=Puerto Iguazu&origin=Buenos Aires",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"flights"
+					],
+					"query": [
+						{
+							"key": "dateFrom",
+							"value": "2/11/2022"
+						},
+						{
+							"key": "dateTo",
+							"value": "2/14/2022"
+						},
+						{
+							"key": "destination",
+							"value": "Puerto Iguazu"
+						},
+						{
+							"key": "origin",
+							"value": "Buenos Aires"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NoFlights",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/flights?dateFrom=11/02/2022&dateTo=14/02/2022&destination=Puerto Iguazu&origin=Buenos Aires",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"flights"
+					],
+					"query": [
+						{
+							"key": "dateFrom",
+							"value": "11/02/2022"
+						},
+						{
+							"key": "dateTo",
+							"value": "14/02/2022"
+						},
+						{
+							"key": "destination",
+							"value": "Puerto Iguazu"
+						},
+						{
+							"key": "origin",
+							"value": "Buenos Aires"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MissingParamFlights",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/flights?dateFrom=11/02/2022&dateTo=14/02/2022&destination=Puerto Iguazu",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"flights"
+					],
+					"query": [
+						{
+							"key": "dateFrom",
+							"value": "11/02/2022"
+						},
+						{
+							"key": "dateTo",
+							"value": "14/02/2022"
+						},
+						{
+							"key": "destination",
+							"value": "Puerto Iguazu"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ValidFlightReservation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n    \"userName\" : \"arjonamiguel@gmail.com\",\r\n    \"flightReservation\" : {\r\n        \"dateFrom\" : \"2/11/2022\",\r\n        \"dateTo\" : \"2/14/2022\",\r\n        \"origin\" : \"Buenos Aires\",\r\n        \"destination\" : \"Puerto Iguazu\",\r\n        \"flightNumber\" : \"BAPI-1235\",\r\n        \"seats\" : 5,\r\n        \"seatType\" : \"Economy\",\r\n        \"people\" : [\r\n            {\r\n                \"dni\" : \"12345678\",\r\n                \"name\" : \"Fulanito\",\r\n                \"lastname\" : \"Gomez\",\r\n                \"birthDate\" : \"10/11/1982\",\r\n                \"mail\" : \"arjonamigue12@gmail.com\"\r\n            },\r\n            {\r\n                \"dni\" : \"183455678\",\r\n                \"name\" : \"juako\",\r\n                \"lastname\" : \"perez\",\r\n                \"birthDate\" : \"10/11/1982\",\r\n                \"mail\" : \"arjonamigue12@gmail.com\"\r\n            }\r\n        ],\r\n        \"paymentMethod\" : {\r\n            \"type\" : \"CREDIT\",\r\n            \"number\" : \"1234-1234-1234-1234\",\r\n            \"dues\" : 6\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/flight-reservation",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"flight-reservation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ValidHotelReservation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userName\" : \"arjonamiguel@gmail.com\",\r\n    \"booking\" : {\r\n        \"dateFrom\" : \"11/02/2022\",\r\n        \"dateTo\" : \"19/03/2022\",\r\n        \"destination\" : \"Puerto Iguazú\",\r\n        \"hotelCode\" : \"CH-0002\",\r\n        \"peopleAmount\" : 2,\r\n        \"roomType\" : \"Double\",\r\n        \"people\" : [\r\n            {\r\n                \"dni\" : \"12345678\",\r\n                \"name\" : \"Fulanito\",\r\n                \"lastname\" : \"Gomez\",\r\n                \"birthDate\" : \"10/11/1982\",\r\n                \"mail\" : \"arjonamigue12@gmail.com\"\r\n            }\r\n        ],\r\n        \"payment\" : {\r\n            \"type\" : \"CREDIT\",\r\n            \"number\" : \"1234-1234-1234-1234\",\r\n            \"dues\" : 6\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/booking",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"booking"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EmptyHotelReservation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userName\" : \"arjonamiguel@gmail.com\",\r\n    \"booking\" : {\r\n        \"dateFrom\" : \"11/02/2022\",\r\n        \"dateTo\" : \"1/1/2021\",\r\n        \"destination\" : \"Puerto Iguazú\",\r\n        \"hotelCode\" : \"CH-0002\",\r\n        \"peopleAmount\" : 2,\r\n        \"roomType\" : \"Double\",\r\n        \"people\" : [\r\n            {\r\n                \"dni\" : \"12345678\",\r\n                \"name\" : \"Fulanito\",\r\n                \"lastname\" : \"Gomez\",\r\n                \"birthDate\" : \"10/11/1982\",\r\n                \"mail\" : \"arjonamigue12@gmail.com\"\r\n            }\r\n        ],\r\n        \"payment\" : {\r\n            \"type\" : \"CREDIT\",\r\n            \"number\" : \"1234-1234-1234-1234\",\r\n            \"dues\" : 6\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/booking",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"booking"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EmptyFlightReservation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userName\" : \"arjonamiguel@gmail.com\",\r\n    \"flightReservation\" : {\r\n        \"dateFrom\" : \"2/56/2022\",\r\n        \"dateTo\" : \"2/22/2022\",\r\n        \"origin\" : \"Buenos Aires\",\r\n        \"destination\" : \"Puerto Iguazu\",\r\n        \"flightNumber\" : \"BAPI-1235\",\r\n        \"seats\" : 5,\r\n        \"seatType\" : \"Economy\",\r\n        \"people\" : [\r\n            {\r\n                \"dni\" : \"12345678\",\r\n                \"name\" : \"Fulanito\",\r\n                \"lastname\" : \"Gomez\",\r\n                \"birthDate\" : \"10/11/1982\",\r\n                \"mail\" : \"arjonamigue12@gmail.com\"\r\n            },\r\n            {\r\n                \"dni\" : \"183455678\",\r\n                \"name\" : \"juako\",\r\n                \"lastname\" : \"perez\",\r\n                \"birthDate\" : \"10/11/1982\",\r\n                \"mail\" : \"arjonamigue12@gmail.com\"\r\n            }\r\n        ],\r\n        \"paymentMethod\" : {\r\n            \"type\" : \"CREDIT\",\r\n            \"number\" : \"1234-1234-1234-1234\",\r\n            \"dues\" : 6\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/flight-reservation",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"flight-reservation"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

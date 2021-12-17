@@ -1,0 +1,111 @@
+[
+ {
+  "id": "BAPI-1235",
+  "origin" : "Buenos Aires",
+  "destiny": "Puerto Iguazu",
+  "seat": "Economy",
+  "price":6500,
+  "leaving":"10/02/2022",
+  "returning":"15/02/2022"
+ },
+ {
+  "id": "PIBA-1420",
+  "origin" : "Puerto Iguazú",
+  "destiny": "Bogota",
+  "seat": "Business",
+  "price":43200,
+  "leaving":"10/02/2022",
+  "returning":"20/02/2022"
+ },
+ {
+  "id": "PIBA-1420",
+  "origin" : "Puerto Iguazú",
+  "destiny": "Bogota",
+  "seat": "Economy",
+  "price":25735,
+  "leaving":"10/02/2022",
+  "returning":"21/02/2022"
+ },
+ {
+  "id": "BATU-5536",
+  "origin" : "Buenos Aire",
+  "destiny": "Tucuman",
+  "seat": "Business",
+  "price":7320,
+  "leaving":"10/02/2022",
+  "returning":"17/02/2022"
+ },
+ {
+  "id": "TUPI-3369",
+  "origin" : "Tucuman",
+  "destiny": "Puerto Iguazú",
+  "seat": "Business",
+  "price":12530,
+  "leaving":"12/02/2022",
+  "returning":"23/02/2022"
+ },
+ {
+  "id": "TUPI-3369",
+  "origin" : "Tucuman",
+  "destiny": "Puerto Iguazú",
+  "seat": "Economy",
+  "price":5400,
+  "leaving":"02/01/2022",
+  "returning":"16/01/2022"
+ },
+ {
+  "id": "BOCA-4213",
+  "origin" : "Bogota",
+  "destiny": "Cartagena",
+  "seat": "Economy",
+  "price":8000,
+  "leaving":"23/01/2022",
+  "returning":"5/02/2022"
+ },
+ {
+  "id": "CAME-0321",
+  "origin" : "Cartagena",
+  "destiny": "Medellin",
+  "seat": "Economy",
+  "price":7800,
+  "leaving":"23/01/2022",
+  "returning":"31/01/2022"
+ },
+ {
+  "id": "BOBA-6567",
+  "origin" : "Bogota",
+  "destiny": "Buenos Aires",
+  "seat": "Business",
+  "price":57000,
+  "leaving":"15/02/2022",
+  "returning":"28/02/2022"
+ },
+ {
+  "id": "BOBA-6567",
+  "origin" : "Bogota",
+  "destiny": "Buenos Aires",
+  "seat": "Economy",
+  "price":39860,
+  "leaving":"01/03/2022",
+  "returning":"14/03/2022"
+ },
+ {
+  "id": "BOME-4442",
+  "origin" : "Bogota",
+  "destiny": "Medellin",
+  "seat": "Economy",
+  "price":11000,
+  "leaving":"10/02/2022",
+  "returning":"24/02/2022"
+ },
+ {
+  "id": "MEPI-9986",
+  "origin" : "Medellin",
+  "destiny": "Puerto Iguazu",
+  "seat": "Business",
+  "price":41640,
+  "leaving":"17/04/2022",
+  "returning":"02/05/2022"
+ }
+]
+ 
