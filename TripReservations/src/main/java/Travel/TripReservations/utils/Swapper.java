@@ -22,6 +22,20 @@ public class Swapper {
         return book;
     }
 
+    public static BookingsDTO bookToDTO (Bookings toSwapp){
+        BookingsDTO book = new BookingsDTO();
+        book.setDateFrom(toSwapp.getDateFrom());
+        book.setDateTo(toSwapp.getDateTo());
+        book.setDestination(toSwapp.getDestination());
+        book.setHotelCode(toSwapp.getHotelCode());
+        book.setPeopleAmount(toSwapp.getPeopleAmount());
+        book.setRoomType(toSwapp.getRoomType());
+        book.setPeople(peopleToDTO(toSwapp.getPeople()));
+        book.setPaymentMethod(paymentToDTO(toSwapp.getPaymentMethod()));
+        book.setTotalEarning(toSwapp.getTotalEarning());
+        return book;
+    }
+
     public static People personFromDTO(PeopleDTO toSwap){
         People person = new People();
         person.setDni(toSwap.getDni());
@@ -31,6 +45,17 @@ public class Swapper {
         person.setMail(toSwap.getMail());
         return person;
     }
+
+    public static PeopleDTO personToDTO(People toSwap){
+        PeopleDTO person = new PeopleDTO();
+        person.setDni(toSwap.getDni());
+        person.setName(toSwap.getName());
+        person.setLastname(toSwap.getLastname());
+        person.setBirthDate(toSwap.getBirthDate());
+        person.setMail(toSwap.getMail());
+        return person;
+    }
+
     public static ArrayList<People> peopleFromDTO(ArrayList<PeopleDTO> toSwap){
         ArrayList<People> ret = new ArrayList<>();
 
@@ -39,8 +64,24 @@ public class Swapper {
         return ret;
     }
 
+    public static ArrayList<PeopleDTO> peopleToDTO(List<People> toSwap){
+        ArrayList<PeopleDTO> ret = new ArrayList<>();
+
+        for (People p : toSwap)
+            ret.add(personToDTO(p));
+        return ret;
+    }
+
     public static Payment paymentFromDTO(PaymentDTO toSwap){
         Payment payment = new Payment();
+        payment.setType(toSwap.getType());
+        payment.setNumber(toSwap.getNumber());
+        payment.setDues(toSwap.getDues());
+        return payment;
+    }
+
+    public static PaymentDTO paymentToDTO(Payment toSwap){
+        PaymentDTO payment = new PaymentDTO();
         payment.setType(toSwap.getType());
         payment.setNumber(toSwap.getNumber());
         payment.setDues(toSwap.getDues());
@@ -134,6 +175,17 @@ public class Swapper {
         ret.setName(toSwap.getName());
         ret.setCreation_date(toSwap.getCreation_date());
         ret.setBookingsOrReservations(bookOrResToDTO(toSwap.getBookingsOrReservations()));
+        return ret;
+    }
+    public static FlightReservationDTO flightToDTO(Flights toSwap){
+        FlightReservationDTO ret = new FlightReservationDTO();
+        ret.setFlightNumber(toSwap.getId());
+        ret.setOrigin(toSwap.getOrigin());
+        ret.setDestination(toSwap.getDestiny());
+        ret.setFlightPrice(toSwap.getPrice());
+        ret.setSeatType(toSwap.getSeat());
+        ret.setDateFrom(toSwap.getLeaving());
+        ret.setDateTo(toSwap.getReturning());
         return ret;
     }
 }

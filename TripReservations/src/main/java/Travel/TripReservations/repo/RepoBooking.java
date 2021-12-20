@@ -25,9 +25,9 @@ public class RepoBooking implements IRepoBooking{
     }
 
     public Bookings addElement(Bookings toAdd){
-        /*todo: set id's to reservations and add to db*/
         int id = toAdd.getId();
         map.put(id, toAdd);
+        repo.save(toAdd);
         return toAdd;
     }
     public Bookings findId(int id){
@@ -57,4 +57,9 @@ public class RepoBooking implements IRepoBooking{
             return repo.monthBookingQuery(month, year);
         return repo.dailyBookingQuery(date);
     }
+
+    public List<Bookings> findAll() {
+        return repo.findAll();
+    }
+
 }

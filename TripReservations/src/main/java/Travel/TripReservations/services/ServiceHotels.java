@@ -3,10 +3,7 @@ package Travel.TripReservations.services;
 
 import Travel.TripReservations.DTOs.*;
 import Travel.TripReservations.exceptionHandlers.*;
-import Travel.TripReservations.models.Bookings;
-import Travel.TripReservations.models.Flights;
-import Travel.TripReservations.models.Hotels;
-import Travel.TripReservations.models.Reservations;
+import Travel.TripReservations.models.*;
 import Travel.TripReservations.repo.RepoBooking;
 import Travel.TripReservations.repo.RepoHotels;
 import Travel.TripReservations.utils.Swapper;
@@ -15,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -68,7 +66,7 @@ public class ServiceHotels implements ServiceHotelsI {
         if (error == 0) {
             if (dateFrom.after(dateTo))
                 throw new WrongDates();
-            ArrayList<Hotels> ret = rephot.getWithParams(dateFrom, dateTo, destination);
+            Set ret = rephot.getWithParams(dateFrom, dateTo, destination);
             if (ret.isEmpty())
                     throw new EmptyList();
             return ret;
@@ -113,6 +111,8 @@ public class ServiceHotels implements ServiceHotelsI {
         entry.setStatusCode(new StatusDTO());
         Bookings newBooking = Swapper.bookFromDTO(booking);
         booking.setTotalEarning(entry.getTotal());
+
+        newBooking.setHotel(rephot.findId(newBooking.getHotelCode()));
         repBoo.addElement(newBooking);
 
         return entry;
@@ -149,7 +149,14 @@ public class ServiceHotels implements ServiceHotelsI {
         repBoo.deleteBooking(id);
     }
 
-
+    public List<BookingsDTO> getHotelReservations () {
+       List<BookingsDTO> bookingsDTO = new ArrayList<>();
+       List<Bookings> bookings = repBoo.findAll();
+       for (Bookings b : bookings) {
+           bookingsDTO.add(Swapper.bookToDTO(b));
+       }
+       return bookingsDTO;
+    }
 
 
 

@@ -1,5 +1,6 @@
 package Travel.TripReservations.repo;
 
+import Travel.TripReservations.models.Bookings;
 import Travel.TripReservations.models.Flights;
 import Travel.TripReservations.models.Reservations;
 import Travel.TripReservations.models.engine.IRepoFlights;
@@ -25,9 +26,9 @@ public class RepoReservation implements IRepoReservation{
     }
 
     public Reservations addElement(Reservations toAdd){
-        /*todo: set id's to reservations and add to db*/
         int id = toAdd.getId();
         map.put(id, toAdd);
+        repo.save(toAdd);
         return toAdd;
     }
     public Reservations findId(int id){
@@ -54,5 +55,6 @@ public class RepoReservation implements IRepoReservation{
             return repo.monthBookQuery(month, year);
         return repo.dailyResQuery(date);
     }
+
 
 }

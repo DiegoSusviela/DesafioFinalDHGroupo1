@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Date;
+import java.util.List;
 
 
 @RestController
@@ -40,8 +41,8 @@ public class ControllerTrips {
      * passed throws specific exception
      **/
     @GetMapping("/hotels")
-    public ResponseEntity<Object> listHotelsParams(@RequestParam (required = false) Date dateFrom,
-                                   @RequestParam (required = false) Date dateTo,
+    public ResponseEntity<Object> listHotelsParams(@Valid @RequestParam (required = false) Date dateFrom,
+                                   @Valid @RequestParam (required = false) Date dateTo,
                                    @Valid @RequestParam (required = false) String destination) {
         return new ResponseEntity<>(servHot.filterHotels(dateFrom, dateTo, destination), HttpStatus.OK);
     }
@@ -55,8 +56,8 @@ public class ControllerTrips {
      * with the reservation made
      */
 
-    @PostMapping("/booking")
-    public ResponseEntity<UsersDTO> reservaHotel(@RequestBody UsersDTO entry) {
+    @PostMapping("/hotel-booking/new")
+    public ResponseEntity<UsersDTO> reservaHotel(@Valid @RequestBody UsersDTO entry) {
         return new ResponseEntity<>(servHot.makeReservation(entry), HttpStatus.OK);
     }
 
@@ -71,10 +72,10 @@ public class ControllerTrips {
      * */
 
     @GetMapping("/flights")
-    public ResponseEntity<Object> listFlights(@RequestParam (required = false) Date dateFrom,
-                              @RequestParam (required = false) Date dateTo,
-                              @RequestParam (required = false) String destination,
-                              @RequestParam (required = false) String origin) {
+    public ResponseEntity<Object> listFlights(@Valid @RequestParam (required = false) Date dateFrom,
+                              @Valid @RequestParam (required = false) Date dateTo,
+                              @Valid @RequestParam (required = false) String destination,
+                              @Valid @RequestParam (required = false) String origin) {
         return new ResponseEntity<>(servFli.filterFlights(dateFrom, dateTo, destination, origin), HttpStatus.OK);
     }
 
@@ -87,7 +88,7 @@ public class ControllerTrips {
      * with the reservation made
      */
 
-    @PostMapping("/flight-reservation")
+    @PostMapping("/flight-reservation/new")
     public ResponseEntity<FlightResDTO> reservaFlights(@RequestBody FlightResDTO entry) {
         return new ResponseEntity<>(servFli.makeReservation(entry), HttpStatus.OK);
     }
@@ -107,6 +108,16 @@ public class ControllerTrips {
         return new ResponseEntity<FlightReservationDTO>(servFli.newFlight(entry), HttpStatus.OK);
     }
 
+    @GetMapping("flight-reservations")
+    public ResponseEntity<List<FlightReservationDTO>> getFlightReservations () {
+        return new ResponseEntity<List<FlightReservationDTO>>(servFli.getFlightReservations(), HttpStatus.OK);
+    }
+
+    @GetMapping("hotel-booking")
+    public ResponseEntity<List<BookingsDTO>> getHotelReservations() {
+        return new ResponseEntity<List<BookingsDTO>>(servHot.getHotelReservations(), HttpStatus.OK);
+    }
+
     @PutMapping("/flights/edit")
     public ResponseEntity<FlightReservationDTO> updateFlight(@RequestBody FlightReservationDTO entry, @RequestParam String flightNumber){
         return new ResponseEntity<FlightReservationDTO>(servFli.updateFlight(entry, flightNumber), HttpStatus.OK);
@@ -116,6 +127,7 @@ public class ControllerTrips {
     public ResponseEntity<FlightReservationDTO> updateHotel(@RequestBody FlightReservationDTO entry, @RequestParam String id){
         return new ResponseEntity<FlightReservationDTO>(servFli.updateFlightRes(entry, id), HttpStatus.OK);
     }
+
 
     @PutMapping("/hotels/edit")
     public ResponseEntity<HotelDTO> updateHotel(@RequestBody HotelDTO entry, @RequestParam int hotelCode){
@@ -147,7 +159,6 @@ public class ControllerTrips {
     public void deleteHotelBooking(@RequestParam int bookingId){
         servHot.deleteHotelBooking(bookingId);
     }
-
 
     @PostMapping("/touristicpackage/new")
     public ResponseEntity<PackageDTO> newPackage(@RequestBody PackageDTO entry){

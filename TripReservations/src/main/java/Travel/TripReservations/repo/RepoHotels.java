@@ -67,7 +67,7 @@ public class RepoHotels implements RepoHotelsI{
         return map;
     }
 
-    public ArrayList<Hotels> getWithParams(Date leav, Date ret, String dest){
+    public Set getWithParams(Date leav, Date ret, String dest){
         return repo.findHotelsByParams(leav, ret, dest);
     }
     public void update(Hotels toUpdate){
@@ -79,5 +79,7 @@ public class RepoHotels implements RepoHotelsI{
         repo.delete(hotelCode);
     }
 
-    }
+
+
+}
 

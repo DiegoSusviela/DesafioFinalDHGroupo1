@@ -1,5 +1,6 @@
 package Travel.TripReservations.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,6 +21,7 @@ public class Package {
     @Id
     protected int packageNumber;
     protected String name;
+    @JsonFormat(pattern = "dd/MM/yyyy", timezone = "GMT-3")
     protected Date creation_date;
     protected int client_id;
     @OneToMany(mappedBy = "pack")

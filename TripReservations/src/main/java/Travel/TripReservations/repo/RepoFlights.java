@@ -71,4 +71,8 @@ public class RepoFlights implements RepoFlightsI{
     public void delete(String flightNumber) {
         repo.deleteById(flightNumber);
     }
+
+    public List<Flights> findAll(){
+        return repo.findAll();
+    }
 }
