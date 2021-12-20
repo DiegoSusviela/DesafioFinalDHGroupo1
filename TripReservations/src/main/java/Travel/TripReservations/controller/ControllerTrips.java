@@ -107,23 +107,24 @@ public class ControllerTrips {
         return new ResponseEntity<FlightReservationDTO>(servFli.newFlight(entry), HttpStatus.OK);
     }
 
-    @PutMapping("/flights")
+    @PutMapping("/flights/edit")
     public ResponseEntity<FlightReservationDTO> updateFlight(@RequestBody FlightReservationDTO entry, @RequestParam String flightNumber){
         return new ResponseEntity<FlightReservationDTO>(servFli.updateFlight(entry, flightNumber), HttpStatus.OK);
     }
-    @PutMapping("/flight-reservation")
+
+    @PutMapping("/flight-reservation/edit")
     public ResponseEntity<FlightReservationDTO> updateHotel(@RequestBody FlightReservationDTO entry, @RequestParam String id){
         return new ResponseEntity<FlightReservationDTO>(servFli.updateFlightRes(entry, id), HttpStatus.OK);
     }
 
-    @PutMapping("/hotels")
+    @PutMapping("/hotels/edit")
     public ResponseEntity<HotelDTO> updateHotel(@RequestBody HotelDTO entry, @RequestParam int hotelCode){
         return new ResponseEntity<HotelDTO>(servHot.updateHotel(entry, hotelCode), HttpStatus.OK);
     }
 
-    @PutMapping("/hotel-booking")
-    public ResponseEntity<BookingsDTO> updateHotel(@RequestBody BookingsDTO entry, @RequestParam int hotelCode){
-        return new ResponseEntity<BookingsDTO>(servHot.updateBook(entry, hotelCode), HttpStatus.OK);
+    @PutMapping("/hotel-booking/edit")
+    public ResponseEntity<BookingsDTO> updateHotel(@RequestBody BookingsDTO entry, @RequestParam int id){
+        return new ResponseEntity<BookingsDTO>(servHot.updateBook(entry, id), HttpStatus.OK);
     }
 
     @DeleteMapping("/flights/delete")
@@ -172,4 +173,5 @@ public class ControllerTrips {
     public ResponseEntity<Object> totalEarningsDay(@RequestParam(required = false) Date date,@RequestParam(required = false) int month, @RequestParam(required = false) int year ){
         return new ResponseEntity<>(servEarn.calculateEarnings(date, month, year), HttpStatus.OK);
     }
+
 }

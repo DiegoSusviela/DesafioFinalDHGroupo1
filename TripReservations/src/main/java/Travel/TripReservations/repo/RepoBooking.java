@@ -41,8 +41,13 @@ public class RepoBooking implements IRepoBooking{
     }
 
     public void update(Bookings toUpdate){
-
+        repo.deleteById(toUpdate.getId());
+        System.out.println("-------------------------------");
+        System.out.println(toUpdate);
+        System.out.println("-------------------------------");
+        repo.save(toUpdate);
     }
+
     public void deleteBooking(int id) {
         repo.deleteById(id);
     }

@@ -33,10 +33,10 @@ public class Bookings {
     private String roomType;
     @ManyToMany (mappedBy = "bookings")
     private List<People> people;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name="payment_id", referencedColumnName = "id")
     private Payment paymentMethod;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "hotel_id", nullable = false)
     private Hotels hotel;
 

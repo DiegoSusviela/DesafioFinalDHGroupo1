@@ -1,5 +1,6 @@
 package Travel.TripReservations.DTOs;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,9 @@ public class HotelDTO {
     protected String place;
     protected String roomType;
     protected Double roomPrice;
-    protected Date disponibilityDateFrom;
-    protected Date disponibilityDateTo;
+    private @JsonFormat(pattern = "MM/dd/yyyy", timezone = "GMT-3")
+    Date disponibilityDateFrom;
+    private @JsonFormat(pattern = "MM/dd/yyyy", timezone = "GMT-3")
+    Date disponibilityDateTo;
     protected boolean isBooking;
 }

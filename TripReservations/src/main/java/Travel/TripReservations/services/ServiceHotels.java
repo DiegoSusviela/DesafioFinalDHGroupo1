@@ -125,15 +125,18 @@ public class ServiceHotels implements ServiceHotelsI {
         return entry;
     }
 
-    public HotelDTO updateHotel(HotelDTO entry, int hotelCode){
+    public HotelDTO updateHotel(HotelDTO entry, int id){
         Hotels toAdd = Swapper.hotelFromDTO(entry);
         toAdd.setBookings(new ArrayList<>());
+        toAdd.setId(id);
         rephot.update(toAdd);
         return entry;
     }
 
     public BookingsDTO updateBook(BookingsDTO entry, int hotelCode){
         Bookings toAdd = Swapper.bookFromDTO(entry);
+        toAdd.setId(hotelCode);
+        System.out.println(toAdd);
         repBoo.update(toAdd);
         return entry;
     }

@@ -40,7 +40,7 @@ public class RepoHotels implements RepoHotelsI{
     public Hotels addElement(Hotels toAdd){
         String hotelCode = toAdd.getHotelCode();
         map.put(hotelCode, toAdd);
-        /*todo: add to data base*/
+        repo.save(toAdd);
         return toAdd;
     }
 
@@ -71,7 +71,8 @@ public class RepoHotels implements RepoHotelsI{
         return repo.findHotelsByParams(leav, ret, dest);
     }
     public void update(Hotels toUpdate){
-
+        repo.deleteById(toUpdate.getId());
+        repo.save(toUpdate);
     }
 
     public void delete(Hotels hotelCode) {

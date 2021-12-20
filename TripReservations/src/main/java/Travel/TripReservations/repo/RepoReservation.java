@@ -41,7 +41,8 @@ public class RepoReservation implements IRepoReservation{
     }
 
     public void update(Reservations toUpdate){
-
+        repo.deleteById(toUpdate.getId());
+        repo.save(toUpdate);
     }
 
     public void deleteReservation(int id) {
