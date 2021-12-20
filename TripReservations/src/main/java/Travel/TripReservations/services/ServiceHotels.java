@@ -1,11 +1,12 @@
 package Travel.TripReservations.services;
 /* Implementation of hotel services modules */
 
-import Travel.TripReservations.DTOs.StatusDTO;
-import Travel.TripReservations.DTOs.UsersDTO;
+import Travel.TripReservations.DTOs.*;
 import Travel.TripReservations.exceptionHandlers.*;
-import Travel.TripReservations.DTOs.BookingsDTO;
+import Travel.TripReservations.models.Bookings;
+import Travel.TripReservations.models.Flights;
 import Travel.TripReservations.models.Hotels;
+import Travel.TripReservations.models.Reservations;
 import Travel.TripReservations.repo.RepoBooking;
 import Travel.TripReservations.repo.RepoHotels;
 import Travel.TripReservations.utils.Swapper;
@@ -110,9 +111,46 @@ public class ServiceHotels implements ServiceHotelsI {
         entry.setAmount(booking.getPeopleAmount() * hotel.getPrice() * tripDuration);
         entry.setTotal(entry.getAmount() * entry.getInterest());
         entry.setStatusCode(new StatusDTO());
-
-        repBoo.addElement(Swapper.bookFromDTO(booking));
+        Bookings newBooking = Swapper.bookFromDTO(booking);
+        booking.setTotalEarning(entry.getTotal());
+        repBoo.addElement(newBooking);
 
         return entry;
     }
+
+    public HotelDTO newHotel(HotelDTO entry){
+        Hotels toAdd = Swapper.hotelFromDTO(entry);
+        toAdd.setBookings(new ArrayList<>());
+        rephot.addElement(toAdd);
+        return entry;
+    }
+
+    public HotelDTO updateHotel(HotelDTO entry, int hotelCode){
+        Hotels toAdd = Swapper.hotelFromDTO(entry);
+        toAdd.setBookings(new ArrayList<>());
+        rephot.update(toAdd);
+        return entry;
+    }
+
+    public BookingsDTO updateBook(BookingsDTO entry, int hotelCode){
+        Bookings toAdd = Swapper.bookFromDTO(entry);
+        repBoo.update(toAdd);
+        return entry;
+    }
+
+    public void deleteHotel(String hotelCode) {
+        rephot.delete(rephot.findId(hotelCode));
+    }
+
+    public void deleteHotelBooking(int id){
+        repBoo.deleteBooking(id);
+    }
+
+
+
+
+
+
+
+
 }

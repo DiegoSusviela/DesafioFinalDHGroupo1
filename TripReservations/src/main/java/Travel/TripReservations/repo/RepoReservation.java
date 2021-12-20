@@ -7,10 +7,7 @@ import Travel.TripReservations.models.engine.IRepoRes;
 import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Repository
 public class RepoReservation implements IRepoReservation{
@@ -28,7 +25,7 @@ public class RepoReservation implements IRepoReservation{
     }
 
     public Reservations addElement(Reservations toAdd){
-        /*todo: set id's to reservations*/
+        /*todo: set id's to reservations and add to db*/
         int id = toAdd.getId();
         map.put(id, toAdd);
         return toAdd;
@@ -41,6 +38,20 @@ public class RepoReservation implements IRepoReservation{
     public Map<Integer, Reservations> getMap(){
         /*todo: set id's to reservations*/
         return map;
+    }
+
+    public void update(Reservations toUpdate){
+
+    }
+
+    public void deleteReservation(int id) {
+        repo.deleteById(id);
+    }
+
+    public List<Reservations> getDailyReservation(Date date, int month, int year){
+        if (date == null)
+            return repo.monthBookQuery(month, year);
+        return repo.dailyResQuery(date);
     }
 
 }

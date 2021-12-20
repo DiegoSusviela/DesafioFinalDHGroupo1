@@ -44,6 +44,8 @@ public class Reservations {
     @JoinColumn(name = "flight_id", nullable = false)
     private Flights flights;
 
+    protected double totalEarnings;
+
     public Reservations(Date dateFrom, Date dateTo, String origin, String destination, String flightNumber, int seats, String seatType, ArrayList<People> people, Payment paymentMethod) {
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;

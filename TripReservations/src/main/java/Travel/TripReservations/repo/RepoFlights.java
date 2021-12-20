@@ -38,6 +38,7 @@ public class RepoFlights implements RepoFlightsI{
     public Flights addElement(Flights toAdd){
         String id = toAdd.getId();
         map.put(id, toAdd);
+        /*todo: add to db*/
         return toAdd;
     }
 
@@ -61,5 +62,12 @@ public class RepoFlights implements RepoFlightsI{
         for (Flights adding : flights)
             addElement(adding);
         return map;
+    }
+    public void update(Flights toUpdate){
+
+    }
+
+    public void delete(String flightNumber) {
+        repo.deleteById(flightNumber);
     }
 }

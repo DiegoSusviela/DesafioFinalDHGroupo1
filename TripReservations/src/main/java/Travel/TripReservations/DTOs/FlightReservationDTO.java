@@ -31,6 +31,7 @@ public class FlightReservationDTO {
     private String flightNumber;
     @Positive(message = "La cantidad de personas debe ser un valor numérico.")
     private int seats;
+    private double flightPrice;
     private String seatType;
     private ArrayList<PeopleDTO> people;
     private PaymentDTO paymentMethod;

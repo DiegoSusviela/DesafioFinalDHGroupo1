@@ -40,4 +40,6 @@ public class Bookings {
     @JoinColumn(name = "hotel_id", nullable = false)
     private Hotels hotel;
 
+    private double totalEarning;
+
 }

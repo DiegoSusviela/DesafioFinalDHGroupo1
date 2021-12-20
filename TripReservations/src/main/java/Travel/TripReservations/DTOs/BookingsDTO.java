@@ -27,4 +27,6 @@ public class BookingsDTO {
     private String roomType;
     private ArrayList<PeopleDTO> people;
     private PaymentDTO paymentMethod;
+
+    private double totalEarning;
 }

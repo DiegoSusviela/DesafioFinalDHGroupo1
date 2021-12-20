@@ -18,4 +18,8 @@ public interface IRepoHotels extends JpaRepository<Hotels, Integer> {
     public ArrayList<Hotels> findHotelsByParams(@Param("dateFrom") Date dateFrom,
     @Param("dateTo") Date dateTo,
     @Param("destination") String destination);
+
+    @Query ("FROM Hotels h where h.hotelCode = :hotelCode")
+    public void deleteHotelByCode(@Param("hotelCode") String hotelCode);
+
 }
