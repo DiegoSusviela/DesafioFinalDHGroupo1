@@ -6,6 +6,7 @@ import Travel.TripReservations.DTOs.PeopleDTO;
 import Travel.TripReservations.DTOs.UsersDTO;
 import Travel.TripReservations.exceptionHandlers.*;
 import Travel.TripReservations.models.Hotels;
+import Travel.TripReservations.models.engine.IRepoHotels;
 import Travel.TripReservations.repo.RepoFlights;
 import Travel.TripReservations.repo.RepoHotels;
 import Travel.TripReservations.utils.Utils;
@@ -36,9 +37,12 @@ public class ServiceHotelsTests {
     @Autowired
     RepoHotels repoHotels;
 
+    @Autowired
+    IRepoHotels iRepoHotels;
+
     @BeforeEach
     private void setUp() throws IOException {
-        repoHotels = new RepoHotels();
+        repoHotels = new RepoHotels(iRepoHotels);
         serviceHotels = new ServiceHotels(repoHotels);
     }
 

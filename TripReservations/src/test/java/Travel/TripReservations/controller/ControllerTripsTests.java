@@ -35,14 +35,14 @@ public class ControllerTripsTests {
     @Test
     void listHotelsParamsTest() throws Exception{
         LinkedMultiValueMap<String, String> requestParams = new LinkedMultiValueMap<>();
-        requestParams.add("dateFrom", "1/3/2022");
-        requestParams.add("dateTo", "05/04/2023");
-        requestParams.add("destination", "Medellín");
+        requestParams.add("dateFrom", "12/31/1999");
+        requestParams.add("dateTo", "12/31/2001");
+        requestParams.add("destination", "BSAS");
         this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/hotels")
                 .params(requestParams)).andExpect(status().isOk())
                 .andDo(MockMvcResultHandlers.print()).andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
-                .andExpect(jsonPath("$.[0].price").value(8600.0));
+                .andExpect(jsonPath("$.[0].price").value(60.0));
     }
 
     @Test
@@ -56,17 +56,17 @@ public class ControllerTripsTests {
                 .params(requestParams)).andExpect(status().isOk())
                 .andDo(MockMvcResultHandlers.print()).andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
-                .andExpect(jsonPath("$.[0].price").value(6500.0));
+                .andExpect(jsonPath("$.[0].price").value(56.0));
     }
 
     @Test
     void reservaHotelTest() throws Exception {
 
-        String value = "11/02/2022";
+        String value = "12/31/1999";
         SimpleDateFormat org = new SimpleDateFormat("MM/dd/yyyy");
         Date dateFrom = org.parse(value.toString());
 
-        value = "19/03/2022";
+        value = "12/31/2001";
         Date dateTo = org.parse(value.toString());
 
 
@@ -75,8 +75,8 @@ public class ControllerTripsTests {
         BookingsDTO booking = new BookingsDTO();
         booking.setDateFrom(dateFrom);
         booking.setDateTo(dateTo);
-        booking.setDestination("Puerto Iguazú");
-        booking.setHotelCode("CH-0002");
+        booking.setDestination("BSAS");
+        booking.setHotelCode("HO89");
         booking.setPeopleAmount(2);
         booking.setRoomType("Double");
         booking.setPeople(new ArrayList<PeopleDTO>());
@@ -90,23 +90,23 @@ public class ControllerTripsTests {
                 .writer();
         String payloadJson = writer.writeValueAsString(user);
 
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/booking")
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/hotel-booking/new")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(payloadJson))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.total").value(3.0618E7));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.total").value(877200.0));
 
     }
 
     @Test
     void reservaFlightsTest() throws Exception {
 
-        String value = "02/11/2022";
+        String value = "07/12/2002";
         SimpleDateFormat org = new SimpleDateFormat("MM/dd/yyyy");
         Date dateFrom = org.parse(value.toString());
 
-        value = "02/14/2022";
+        value = "07/12/2003";
         Date dateTo = org.parse(value.toString());
 
 
@@ -115,9 +115,9 @@ public class ControllerTripsTests {
         FlightReservationDTO reservation = new FlightReservationDTO();
         reservation.setDateFrom(dateFrom);
         reservation.setDateTo(dateTo);
-        reservation.setDestination("Puerto Iguazu");
-        reservation.setOrigin("Buenos Aires");
-        reservation.setFlightNumber("BAPI-1235");
+        reservation.setDestination("dest1");
+        reservation.setOrigin("ori1");
+        reservation.setFlightNumber("copaA320");
         reservation.setSeats(5);
         reservation.setSeatType("Economy");
         PeopleDTO person = new PeopleDTO("dni", "name", "lastname", "brithdate", "mail@mail.com");
@@ -135,14 +135,85 @@ public class ControllerTripsTests {
                 .writer();
         String payloadJson = writer.writeValueAsString(flight);
 
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/flight-reservation")
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/flight-reservation/new")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(payloadJson))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.total").value(325000.0));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.total").value(28050.0));
     }
 
-}
 
+
+    @Test
+    void createHotelTest() throws Exception {
+
+        String value = "12/31/1999";
+        SimpleDateFormat org = new SimpleDateFormat("MM/dd/yyyy");
+        Date dateFrom = org.parse(value.toString());
+
+        value = "12/31/2001";
+        Date dateTo = org.parse(value.toString());
+
+
+        HotelDTO hotelDTO = new HotelDTO();
+        hotelDTO.setHotelcode("TestHotelCode");
+        hotelDTO.setName("Mariam");
+        hotelDTO.setPlace("paramo");
+        hotelDTO.setRoomType("Single");
+        hotelDTO.setRoomPrice(60.0);
+        hotelDTO.setDisponibilityDateFrom(dateFrom);
+        hotelDTO.setDisponibilityDateTo(dateTo);
+
+
+        ObjectWriter writer = new ObjectMapper()
+                .configure(SerializationFeature.WRAP_ROOT_VALUE, false)
+                .writer();
+        String payloadJson = writer.writeValueAsString(hotelDTO);
+
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/hotels/new")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(payloadJson))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.hotelcode").value("TestHotelCode"));
+
+    }
+    @Test
+    void createFlightTest() throws Exception {
+
+        String value = "12/31/2022";
+        SimpleDateFormat org = new SimpleDateFormat("MM/dd/yyyy");
+        Date dateFrom = org.parse(value.toString());
+
+        value = "12/31/2022";
+        Date dateTo = org.parse(value.toString());
+
+
+        FlightReservationDTO flight = new FlightReservationDTO();
+        flight.setFlightPrice(60.0);
+        flight.setDateTo(dateTo);
+        flight.setDateFrom(dateFrom);
+        flight.setOrigin("Origen");
+        flight.setDestination("Destino");
+        flight.setFlightNumber("Ib420");
+        flight.setSeatType("Economy");
+
+        ObjectWriter writer = new ObjectMapper()
+                .configure(SerializationFeature.WRAP_ROOT_VALUE, false)
+                .writer();
+        String payloadJson = writer.writeValueAsString(flight);
+
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/flights/new")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(payloadJson))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.flightNumber").value("Ib420"));
+
+    }
+
+
+
+}
 

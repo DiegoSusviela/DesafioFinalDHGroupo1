@@ -48,8 +48,9 @@ public class RepoBooking implements IRepoBooking{
     }
 
     public List<Bookings> getDailyBooking(Date date, int month, int year){
+        Date toSearch = new GregorianCalendar(year, month, 1).getTime();
         if (date == null)
-            return repo.monthBookingQuery(month, year);
+            return repo.monthBookingQuery(toSearch);
         return repo.dailyBookingQuery(date);
     }
 

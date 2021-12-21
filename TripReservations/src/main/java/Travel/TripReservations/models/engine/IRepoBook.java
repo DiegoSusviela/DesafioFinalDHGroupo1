@@ -16,5 +16,5 @@ public interface IRepoBook extends JpaRepository<Bookings, Integer> {
     public List<Bookings> dailyBookingQuery(@Param("date") Date date);
 
     @Query("FROM Bookings")
-    public List<Bookings> monthBookingQuery(@Param("month") int month, @Param("year") int year);
+    public List<Bookings> monthBookingQuery(@Param("toSearch") Date toSearch);
 }
