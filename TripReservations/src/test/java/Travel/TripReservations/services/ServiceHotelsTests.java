@@ -1,4 +1,4 @@
-package Travel.TripReservations.services;
+/*package Travel.TripReservations.services;
 
 import Travel.TripReservations.DTOs.BookingsDTO;
 import Travel.TripReservations.DTOs.PaymentDTO;
@@ -89,3 +89,4 @@ public class ServiceHotelsTests {
         Assertions.assertEquals("El tipo de habitación seleccionada no coincide con la cantidad de personas que se alojarán en ella.", ex.getMessage());
     }
 }
+*/
