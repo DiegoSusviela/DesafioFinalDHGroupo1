@@ -36,8 +36,8 @@ public class ControllerTripsTests {
     @Test
     void listHotelsParamsTest() throws Exception{
         LinkedMultiValueMap<String, String> requestParams = new LinkedMultiValueMap<>();
-        requestParams.add("dateFrom", "31/12/2020");
-        requestParams.add("dateTo", "31/12/2021");
+        requestParams.add("dateFrom", "02/02/2021");
+        requestParams.add("dateTo", "02/03/2021");
         requestParams.add("destination", "Buenos Aires");
         this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/hotels")
                 .params(requestParams)).andExpect(status().isOk())
@@ -70,7 +70,6 @@ public class ControllerTripsTests {
         value = "01/01/2022";
         Date dateTo = org.parse(value.toString());
 
-
         UsersDTO user = new UsersDTO();
         user.setUserName("arjonamiguel@gmail.com");
         BookingsDTO booking = new BookingsDTO();
@@ -79,7 +78,7 @@ public class ControllerTripsTests {
         booking.setDestination("Buenos Aires");
         booking.setHotelCode("CH-0002");
         booking.setPeopleAmount(2);
-        booking.setRoomType("Double");
+        booking.setRoomType("Doble");
         booking.setPeople(new ArrayList<PeopleDTO>());
         PaymentDTO payment = new PaymentDTO("CREDIT", "1-256-589-3", 5);
         booking.setPaymentMethod(payment);
@@ -97,7 +96,6 @@ public class ControllerTripsTests {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.total").value(3.0618E7));
-
     }
 
     @Test
