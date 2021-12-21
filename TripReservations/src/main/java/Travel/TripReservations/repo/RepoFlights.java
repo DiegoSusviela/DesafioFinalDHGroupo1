@@ -64,7 +64,6 @@ public class RepoFlights implements RepoFlightsI{
         return map;
     }
     public void update(Flights toUpdate){
-        repo.deleteById(toUpdate.getId());
         repo.save(toUpdate);
     }
 

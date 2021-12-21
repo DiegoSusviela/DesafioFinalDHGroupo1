@@ -12,8 +12,10 @@ import java.util.List;
 import java.util.Set;
 
 public interface IRepoHotels extends JpaRepository<Hotels, Integer> {
+
     @Query("FROM Hotels")
     public List<Hotels> hotelQuery();
+
     @Query("SELECT hotel FROM Hotels hotel WHERE hotel.freeFrom >= :dateFrom AND hotel.freeTo <= :dateTo AND :destination = hotel.location")
     //@Query("from Hotels")
     public Set findHotelsByParams(@Param("dateFrom") Date dateFrom,

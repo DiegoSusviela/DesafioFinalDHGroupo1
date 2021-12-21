@@ -3,6 +3,7 @@ package Travel.TripReservations.models;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -44,5 +45,6 @@ public class Hotels {
     Date freeTo;
     private boolean reserved;
     @OneToMany(mappedBy = "hotel")
+    @JsonIgnore
     private List<Bookings> bookings;
 }

@@ -67,8 +67,10 @@ public class ServiceHotels implements ServiceHotelsI {
             if (dateFrom.after(dateTo))
                 throw new WrongDates();
             Set ret = rephot.getWithParams(dateFrom, dateTo, destination);
-            if (ret.isEmpty())
-                    throw new EmptyList();
+
+            if (ret.isEmpty()) {
+                throw new EmptyList();
+            }
             return ret;
         }
         throw new MissingDestination();
@@ -99,7 +101,9 @@ public class ServiceHotels implements ServiceHotelsI {
         }
         BookingsDTO booking = entry.getBooking();
         Set available = (Set) filterHotels(booking.getDateFrom(), booking.getDateTo(), booking.getDestination());
+
         Hotels hotel = rephot.findId(booking.getHotelCode());
+
         if (!available.contains(hotel))
             throw new NotAvailable();
         hotel.setReserved(true);
@@ -152,7 +156,8 @@ public class ServiceHotels implements ServiceHotelsI {
     public List<BookingsDTO> getHotelReservations () {
        List<BookingsDTO> bookingsDTO = new ArrayList<>();
        List<Bookings> bookings = repBoo.findAll();
-       for (Bookings b : bookings) {
+        System.out.println(bookingsDTO);
+        for (Bookings b : bookings) {
            bookingsDTO.add(Swapper.bookToDTO(b));
        }
        return bookingsDTO;

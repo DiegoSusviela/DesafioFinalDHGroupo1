@@ -16,9 +16,8 @@ public class RepoBooking implements IRepoBooking{
     private IRepoBook repo;
 
     public RepoBooking(IRepoBook repos) throws IOException {
-        /*todo: change to db*/
         this.repo = repos;
-        List<Bookings> bookings = new ArrayList<>();
+        List<Bookings> bookings = repo.findAll();
 
         for (Bookings adding : bookings)
             addElement(adding);
@@ -41,10 +40,6 @@ public class RepoBooking implements IRepoBooking{
     }
 
     public void update(Bookings toUpdate){
-        repo.deleteById(toUpdate.getId());
-        System.out.println("-------------------------------");
-        System.out.println(toUpdate);
-        System.out.println("-------------------------------");
         repo.save(toUpdate);
     }
 

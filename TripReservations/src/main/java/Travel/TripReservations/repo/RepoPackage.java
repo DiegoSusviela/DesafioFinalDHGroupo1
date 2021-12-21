@@ -49,7 +49,6 @@ public class RepoPackage {
     }
 
     public void update(Package toUpdate){
-        repo.deleteById(toUpdate.getPackageNumber());
         repo.save(toUpdate);
     }
 

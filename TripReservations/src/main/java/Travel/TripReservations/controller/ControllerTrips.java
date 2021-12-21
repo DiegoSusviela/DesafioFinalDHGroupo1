@@ -108,12 +108,12 @@ public class ControllerTrips {
         return new ResponseEntity<FlightReservationDTO>(servFli.newFlight(entry), HttpStatus.OK);
     }
 
-    @GetMapping("flight-reservations")
+    @GetMapping("/flight-reservations")
     public ResponseEntity<List<FlightReservationDTO>> getFlightReservations () {
         return new ResponseEntity<List<FlightReservationDTO>>(servFli.getFlightReservations(), HttpStatus.OK);
     }
 
-    @GetMapping("hotel-booking")
+    @GetMapping("/hotel-booking")
     public ResponseEntity<List<BookingsDTO>> getHotelReservations() {
         return new ResponseEntity<List<BookingsDTO>>(servHot.getHotelReservations(), HttpStatus.OK);
     }
@@ -127,7 +127,6 @@ public class ControllerTrips {
     public ResponseEntity<FlightReservationDTO> updateHotel(@RequestBody FlightReservationDTO entry, @RequestParam String id){
         return new ResponseEntity<FlightReservationDTO>(servFli.updateFlightRes(entry, id), HttpStatus.OK);
     }
-
 
     @PutMapping("/hotels/edit")
     public ResponseEntity<HotelDTO> updateHotel(@RequestBody HotelDTO entry, @RequestParam int hotelCode){
@@ -184,5 +183,7 @@ public class ControllerTrips {
     public ResponseEntity<Object> totalEarningsDay(@RequestParam(required = false) Date date,@RequestParam(required = false) int month, @RequestParam(required = false) int year ){
         return new ResponseEntity<>(servEarn.calculateEarnings(date, month, year), HttpStatus.OK);
     }
+
+
 
 }

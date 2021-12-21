@@ -28,7 +28,7 @@ public class RepoHotels implements RepoHotelsI{
         this.repo = repos;
         List<Hotels> hotels = repo.hotelQuery();
         for (Hotels adding : hotels)
-            addElement(adding);
+            map.put(adding.getHotelCode(), adding);
     }
 
     /**
@@ -68,18 +68,19 @@ public class RepoHotels implements RepoHotelsI{
     }
 
     public Set getWithParams(Date leav, Date ret, String dest){
-        return repo.findHotelsByParams(leav, ret, dest);
+
+        Set wopa = repo.findHotelsByParams(leav, ret, dest);
+        
+
+        return wopa;
     }
     public void update(Hotels toUpdate){
-        repo.deleteById(toUpdate.getId());
         repo.save(toUpdate);
     }
 
     public void delete(Hotels hotelCode) {
         repo.delete(hotelCode);
     }
-
-
 
 }
 
