@@ -4,13 +4,14 @@ package Travel.TripReservations.repo;
 import Travel.TripReservations.models.Flights;
 import Travel.TripReservations.models.engine.FileStorage;
 import Travel.TripReservations.models.engine.IRepoFlights;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@NoArgsConstructor
 @Repository
 public class RepoFlights implements RepoFlightsI{
     private Map<String, Flights> map = new HashMap<>();

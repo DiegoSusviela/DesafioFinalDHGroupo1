@@ -16,7 +16,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 class ServiceFlightsTests {
-
+/*
     @InjectMocks
     ServiceFlights serviceFlights;
 
@@ -85,4 +85,6 @@ class ServiceFlightsTests {
 
         Assertions.assertEquals("Date from shouldnt be before Date to", ex.getMessage());
     }
+
+ */
 }

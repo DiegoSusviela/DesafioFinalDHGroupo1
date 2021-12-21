@@ -32,24 +32,25 @@ public class ControllerTripsTests {
     @Autowired
     MockMvc mockMvc;
 
+
     @Test
     void listHotelsParamsTest() throws Exception{
         LinkedMultiValueMap<String, String> requestParams = new LinkedMultiValueMap<>();
-        requestParams.add("dateFrom", "1/3/2022");
-        requestParams.add("dateTo", "05/04/2023");
-        requestParams.add("destination", "Medellín");
+        requestParams.add("dateFrom", "31/12/2020");
+        requestParams.add("dateTo", "31/12/2021");
+        requestParams.add("destination", "Buenos Aires");
         this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/hotels")
                 .params(requestParams)).andExpect(status().isOk())
                 .andDo(MockMvcResultHandlers.print()).andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
-                .andExpect(jsonPath("$.[0].price").value(8600.0));
+                .andExpect(jsonPath("$.[0].price").value(100.00));
     }
 
     @Test
     void listFlightsParamsTest() throws Exception{
         LinkedMultiValueMap<String, String> requestParams = new LinkedMultiValueMap<>();
-        requestParams.add("dateFrom", "02/11/2022");
-        requestParams.add("dateTo", "02/14/2022");
+        requestParams.add("dateFrom", "01/01/2022");
+        requestParams.add("dateTo", "01/01/2023");
         requestParams.add("destination", "Puerto Iguazu");
         requestParams.add("origin", "Buenos Aires");
         this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/flights")
@@ -62,11 +63,11 @@ public class ControllerTripsTests {
     @Test
     void reservaHotelTest() throws Exception {
 
-        String value = "11/02/2022";
+        String value = "01/01/2022";
         SimpleDateFormat org = new SimpleDateFormat("MM/dd/yyyy");
         Date dateFrom = org.parse(value.toString());
 
-        value = "19/03/2022";
+        value = "01/01/2022";
         Date dateTo = org.parse(value.toString());
 
 
@@ -75,7 +76,7 @@ public class ControllerTripsTests {
         BookingsDTO booking = new BookingsDTO();
         booking.setDateFrom(dateFrom);
         booking.setDateTo(dateTo);
-        booking.setDestination("Puerto Iguazú");
+        booking.setDestination("Buenos Aires");
         booking.setHotelCode("CH-0002");
         booking.setPeopleAmount(2);
         booking.setRoomType("Double");
@@ -102,11 +103,11 @@ public class ControllerTripsTests {
     @Test
     void reservaFlightsTest() throws Exception {
 
-        String value = "02/11/2022";
+        String value = "01/01/2022";
         SimpleDateFormat org = new SimpleDateFormat("MM/dd/yyyy");
         Date dateFrom = org.parse(value.toString());
 
-        value = "02/14/2022";
+        value = "01/01/2022";
         Date dateTo = org.parse(value.toString());
 
 

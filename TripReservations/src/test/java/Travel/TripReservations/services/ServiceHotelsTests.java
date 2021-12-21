@@ -27,6 +27,7 @@ import java.util.*;
 @ExtendWith(MockitoExtension.class)
 public class ServiceHotelsTests {
 
+    /*
     @InjectMocks
     ServiceHotels serviceHotels;
 
@@ -88,4 +89,6 @@ public class ServiceHotelsTests {
         UnmatchedPeopleRoom ex = Assertions.assertThrows(UnmatchedPeopleRoom.class, () -> {serviceHotels.makeReservation(utils.createUser("11/02/2022", "19/03/2022"));});
         Assertions.assertEquals("El tipo de habitación seleccionada no coincide con la cantidad de personas que se alojarán en ella.", ex.getMessage());
     }
+    */
+
 }
