@@ -2,6 +2,7 @@ package Travel.TripReservations.repo;
 /* implements for hotel repo */
 
 
+import Travel.TripReservations.models.Flights;
 import Travel.TripReservations.models.Hotels;
 import Travel.TripReservations.models.engine.FileStorage;
 import Travel.TripReservations.models.engine.IRepoHotels;
@@ -27,7 +28,7 @@ public class RepoHotels implements RepoHotelsI{
         this.repo = repos;
         List<Hotels> hotels = repo.hotelQuery();
         for (Hotels adding : hotels)
-            addElement(adding);
+            map.put(adding.getHotelCode(), adding);
     }
 
     /**
@@ -39,6 +40,7 @@ public class RepoHotels implements RepoHotelsI{
     public Hotels addElement(Hotels toAdd){
         String hotelCode = toAdd.getHotelCode();
         map.put(hotelCode, toAdd);
+        repo.save(toAdd);
         return toAdd;
     }
 
@@ -65,7 +67,20 @@ public class RepoHotels implements RepoHotelsI{
         return map;
     }
 
-    public ArrayList<Hotels> getWithParams(Date leav, Date ret, String dest){
-        return repo.findHotelsByParams(leav, ret, dest);
+    public Set getWithParams(Date leav, Date ret, String dest){
+
+        Set wopa = repo.findHotelsByParams(leav, ret, dest);
+        
+
+        return wopa;
     }
+    public void update(Hotels toUpdate){
+        repo.save(toUpdate);
+    }
+
+    public void delete(Hotels hotelCode) {
+        repo.delete(hotelCode);
+    }
+
 }
+

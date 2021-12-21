@@ -1,11 +1,9 @@
 package Travel.TripReservations.services;
 /* Implementation of hotel services modules */
 
-import Travel.TripReservations.DTOs.StatusDTO;
-import Travel.TripReservations.DTOs.UsersDTO;
+import Travel.TripReservations.DTOs.*;
 import Travel.TripReservations.exceptionHandlers.*;
-import Travel.TripReservations.DTOs.BookingsDTO;
-import Travel.TripReservations.models.Hotels;
+import Travel.TripReservations.models.*;
 import Travel.TripReservations.repo.RepoBooking;
 import Travel.TripReservations.repo.RepoHotels;
 import Travel.TripReservations.utils.Swapper;
@@ -14,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -67,9 +66,11 @@ public class ServiceHotels implements ServiceHotelsI {
         if (error == 0) {
             if (dateFrom.after(dateTo))
                 throw new WrongDates();
-            ArrayList<Hotels> ret = rephot.getWithParams(dateFrom, dateTo, destination);
-            if (ret.isEmpty())
-                    throw new EmptyList();
+            Set ret = rephot.getWithParams(dateFrom, dateTo, destination);
+
+            if (ret.isEmpty()) {
+                throw new EmptyList();
+            }
             return ret;
         }
         throw new MissingDestination();
@@ -100,7 +101,9 @@ public class ServiceHotels implements ServiceHotelsI {
         }
         BookingsDTO booking = entry.getBooking();
         Set available = (Set) filterHotels(booking.getDateFrom(), booking.getDateTo(), booking.getDestination());
+
         Hotels hotel = rephot.findId(booking.getHotelCode());
+
         if (!available.contains(hotel))
             throw new NotAvailable();
         hotel.setReserved(true);
@@ -110,9 +113,59 @@ public class ServiceHotels implements ServiceHotelsI {
         entry.setAmount(booking.getPeopleAmount() * hotel.getPrice() * tripDuration);
         entry.setTotal(entry.getAmount() * entry.getInterest());
         entry.setStatusCode(new StatusDTO());
+        Bookings newBooking = Swapper.bookFromDTO(booking);
+        booking.setTotalEarning(entry.getTotal());
 
-        repBoo.addElement(Swapper.bookFromDTO(booking));
+        newBooking.setHotel(rephot.findId(newBooking.getHotelCode()));
+        repBoo.addElement(newBooking);
 
         return entry;
     }
+
+    public HotelDTO newHotel(HotelDTO entry){
+        Hotels toAdd = Swapper.hotelFromDTO(entry);
+        toAdd.setBookings(new ArrayList<>());
+        rephot.addElement(toAdd);
+        return entry;
+    }
+
+    public HotelDTO updateHotel(HotelDTO entry, int id){
+        Hotels toAdd = Swapper.hotelFromDTO(entry);
+        toAdd.setBookings(new ArrayList<>());
+        toAdd.setId(id);
+        rephot.update(toAdd);
+        return entry;
+    }
+
+    public BookingsDTO updateBook(BookingsDTO entry, int hotelCode){
+        Bookings toAdd = Swapper.bookFromDTO(entry);
+        toAdd.setId(hotelCode);
+        System.out.println(toAdd);
+        repBoo.update(toAdd);
+        return entry;
+    }
+
+    public void deleteHotel(String hotelCode) {
+        rephot.delete(rephot.findId(hotelCode));
+    }
+
+    public void deleteHotelBooking(int id){
+        repBoo.deleteBooking(id);
+    }
+
+    public List<BookingsDTO> getHotelReservations () {
+       List<BookingsDTO> bookingsDTO = new ArrayList<>();
+       List<Bookings> bookings = repBoo.findAll();
+        System.out.println(bookingsDTO);
+        for (Bookings b : bookings) {
+           bookingsDTO.add(Swapper.bookToDTO(b));
+       }
+       return bookingsDTO;
+    }
+
+
+
+
+
+
 }

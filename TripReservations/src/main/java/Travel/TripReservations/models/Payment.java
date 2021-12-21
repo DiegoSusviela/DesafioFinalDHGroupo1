@@ -1,5 +1,6 @@
 package Travel.TripReservations.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +20,9 @@ public class Payment {
     private String number;
     private int dues;
     @OneToOne(mappedBy = "paymentMethod")
+    @JsonIgnore
     private Bookings bookings;
     @OneToOne(mappedBy = "paymentMethod")
+    @JsonIgnore
     private Reservations reservations;
 }

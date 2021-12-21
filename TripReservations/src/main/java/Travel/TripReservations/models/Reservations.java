@@ -3,6 +3,7 @@ package Travel.TripReservations.models;
 import Travel.TripReservations.DTOs.PaymentDTO;
 import Travel.TripReservations.DTOs.PeopleDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -39,10 +40,14 @@ public class Reservations {
     private List<People> people;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name= "payment_id", referencedColumnName = "id")
+    @JsonIgnore
     private Payment paymentMethod;
     @ManyToOne
     @JoinColumn(name = "flight_id", nullable = false)
+    @JsonIgnore
     private Flights flights;
+
+    protected double totalEarnings;
 
     public Reservations(Date dateFrom, Date dateTo, String origin, String destination, String flightNumber, int seats, String seatType, ArrayList<People> people, Payment paymentMethod) {
         this.dateFrom = dateFrom;

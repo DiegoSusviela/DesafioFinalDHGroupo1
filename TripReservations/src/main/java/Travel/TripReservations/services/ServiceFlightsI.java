@@ -13,4 +13,5 @@ public interface ServiceFlightsI {
     /* Service flights interface */
     Object filterFlights(Date dateFrom, Date dateTo, String destination, String origin);
     FlightResDTO makeReservation(FlightResDTO entry) throws ParseException;
+
 }
