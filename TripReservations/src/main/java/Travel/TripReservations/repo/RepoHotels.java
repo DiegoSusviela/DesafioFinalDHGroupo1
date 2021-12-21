@@ -67,12 +67,10 @@ public class RepoHotels implements RepoHotelsI{
         return map;
     }
 
-    public Set getWithParams(Date leav, Date ret, String dest){
+    public Set<Hotels> getWithParams(Date leav, Date ret, String dest){
 
-        Set wopa = repo.findHotelsByParams(leav, ret, dest);
-        
+        return repo.findHotelsByParams(leav, ret, dest);
 
-        return wopa;
     }
     public void update(Hotels toUpdate){
         repo.save(toUpdate);

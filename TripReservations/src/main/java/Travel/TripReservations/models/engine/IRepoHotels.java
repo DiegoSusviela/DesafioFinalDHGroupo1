@@ -18,7 +18,7 @@ public interface IRepoHotels extends JpaRepository<Hotels, Integer> {
 
     @Query("SELECT hotel FROM Hotels hotel WHERE hotel.freeFrom >= :dateFrom AND hotel.freeTo <= :dateTo AND :destination = hotel.location")
     //@Query("from Hotels")
-    public Set findHotelsByParams(@Param("dateFrom") Date dateFrom,
+    public Set<Hotels> findHotelsByParams(@Param("dateFrom") Date dateFrom,
                                   @Param("dateTo") Date dateTo,
                                   @Param("destination") String destination);
 
