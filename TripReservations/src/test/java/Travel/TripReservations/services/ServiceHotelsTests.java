@@ -1,4 +1,4 @@
-package Travel.TripReservations.services;
+/*package Travel.TripReservations.services;
 
 import Travel.TripReservations.DTOs.BookingsDTO;
 import Travel.TripReservations.DTOs.PaymentDTO;
@@ -92,3 +92,4 @@ public class ServiceHotelsTests {
     */
 
 }
+*/

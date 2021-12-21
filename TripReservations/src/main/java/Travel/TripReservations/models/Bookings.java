@@ -35,13 +35,13 @@ public class Bookings {
     @Positive(message = "La cantidad de personas debe ser un valor numérico.")
     private int peopleAmount;
     private String roomType;
-    @ManyToMany (mappedBy = "bookings")
+    @ManyToMany (mappedBy = "bookings", cascade=CascadeType.ALL)
     private List<People> people;
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="payment_id", referencedColumnName = "id")
     @JsonIgnore
     private Payment paymentMethod;
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "hotel_id", nullable = false)
     @JsonIgnore
     private Hotels hotel;

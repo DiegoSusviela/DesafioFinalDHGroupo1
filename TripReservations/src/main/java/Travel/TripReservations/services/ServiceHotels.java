@@ -68,7 +68,7 @@ public class ServiceHotels implements ServiceHotelsI {
                 throw new WrongDates();
             Set<Hotels> ret = rephot.getWithParams(dateFrom, dateTo, destination);
             for (Hotels h : ret)
-                System.out.println(h.getHotelCode());
+                rephot.addElement(h);
             if (ret.isEmpty()) {
                 throw new EmptyList();
             }

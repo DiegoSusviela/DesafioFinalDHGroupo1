@@ -19,10 +19,10 @@ public class Payment {
     private String type;
     private String number;
     private int dues;
-    @OneToOne(mappedBy = "paymentMethod")
+    @OneToOne(mappedBy = "paymentMethod", cascade=CascadeType.ALL)
     @JsonIgnore
     private Bookings bookings;
-    @OneToOne(mappedBy = "paymentMethod")
+    @OneToOne(mappedBy = "paymentMethod", cascade=CascadeType.ALL)
     @JsonIgnore
     private Reservations reservations;
 }
