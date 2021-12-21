@@ -44,7 +44,7 @@ public class Hotels {
     private @JsonFormat(pattern = "MM/dd/yyyy", timezone = "GMT-3")
     Date freeTo;
     private boolean reserved;
-    @OneToMany(mappedBy = "hotel")
+    @OneToMany(mappedBy = "hotel", cascade=CascadeType.ALL)
     @JsonIgnore
     private List<Bookings> bookings;
 }
