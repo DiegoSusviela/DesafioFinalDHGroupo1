@@ -2,6 +2,8 @@ package Travel.TripReservations.models;
 
 import Travel.TripReservations.DTOs.PaymentDTO;
 import Travel.TripReservations.DTOs.PeopleDTO;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -23,7 +25,9 @@ public class Bookings {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
+    @JsonFormat(pattern = "dd/MM/yyyy", timezone = "GMT-3")
     Date dateFrom;
+    @JsonFormat(pattern = "dd/MM/yyyy", timezone = "GMT-3")
     Date dateTo;
     @NotBlank(message = "El destino elegido no existe")
     private String destination;
@@ -33,11 +37,15 @@ public class Bookings {
     private String roomType;
     @ManyToMany (mappedBy = "bookings")
     private List<People> people;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name="payment_id", referencedColumnName = "id")
+    @JsonIgnore
     private Payment paymentMethod;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "hotel_id", nullable = false)
+    @JsonIgnore
     private Hotels hotel;
+
+    private double totalEarning;
 
 }

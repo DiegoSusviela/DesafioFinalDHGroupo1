@@ -17,7 +17,9 @@ import java.util.Date;
 @NoArgsConstructor
 public class BookingsDTO {
     /*Bookings class definition*/
+    private @JsonFormat(pattern = "MM/dd/yyyy", timezone = "GMT-3")
     Date dateFrom;
+    private @JsonFormat(pattern = "MM/dd/yyyy", timezone = "GMT-3")
     Date dateTo;
     @NotBlank(message = "El destino elegido no existe")
     private String destination;
@@ -27,4 +29,6 @@ public class BookingsDTO {
     private String roomType;
     private ArrayList<PeopleDTO> people;
     private PaymentDTO paymentMethod;
+
+    private double totalEarning;
 }
