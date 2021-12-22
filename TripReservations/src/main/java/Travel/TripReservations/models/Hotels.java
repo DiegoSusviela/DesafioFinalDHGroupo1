@@ -3,6 +3,7 @@ package Travel.TripReservations.models;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -43,6 +44,7 @@ public class Hotels {
     private @JsonFormat(pattern = "MM/dd/yyyy", timezone = "GMT-3")
     Date freeTo;
     private boolean reserved;
-    @OneToMany(mappedBy = "hotel")
+    @OneToMany(mappedBy = "hotel", cascade=CascadeType.ALL)
+    @JsonIgnore
     private List<Bookings> bookings;
 }

@@ -8,4 +8,5 @@ public interface RepoHotelsI {
     Hotels addElement(Hotels toAdd);
     Hotels findId(String hotelCode);
     Map<String, Hotels> getMap();
+
 }

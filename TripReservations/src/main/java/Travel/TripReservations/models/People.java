@@ -1,5 +1,6 @@
 package Travel.TripReservations.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,6 +21,7 @@ public class People {
     private String dni;
     private String name;
     private String lastname;
+    @JsonFormat(pattern = "dd/MM/yyyy", timezone = "GMT-3")
     private String birthDate;
     private String mail;
     @ManyToMany

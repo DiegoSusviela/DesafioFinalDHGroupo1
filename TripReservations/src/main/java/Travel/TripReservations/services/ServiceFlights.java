@@ -3,6 +3,7 @@ package Travel.TripReservations.services;
 
 import Travel.TripReservations.DTOs.FlightResDTO;
 import Travel.TripReservations.DTOs.FlightReservationDTO;
+import Travel.TripReservations.DTOs.HotelDTO;
 import Travel.TripReservations.DTOs.StatusDTO;
 import Travel.TripReservations.exceptionHandlers.*;
 import Travel.TripReservations.models.*;
@@ -14,7 +15,10 @@ import Travel.TripReservations.utils.Swapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Array;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -136,13 +140,56 @@ public class ServiceFlights implements ServiceFlightsI{
         Flights flight = repfli.findId(flightRes.getFlightNumber());
         if (!available.contains(flight))
             throw new NotAvailable();
-        System.out.println(flight);
         entry.setAmount(flightRes.getSeats() * flight.getPrice());
         entry.setTotal(entry.getAmount() * entry.getInterest());
         entry.setStatusCode(new StatusDTO());
 
-        repRes.addElement(Swapper.fliResFromDTO(flightRes));
+        Reservations newRes = Swapper.fliResFromDTO(flightRes);
+        newRes.setTotalEarnings(entry.getTotal());
+
+        newRes.setFlights(repfli.findId(newRes.getFlightNumber()));
+        repRes.addElement(newRes);
 
         return entry;
     }
+
+    public void deleteFlightReservation(int id) {
+        repRes.deleteReservation(id);
+    }
+
+
+    public FlightReservationDTO newFlight(FlightReservationDTO entry){
+        Flights toAdd = Swapper.flightsFromDTO(entry);
+        toAdd.setReservations(new ArrayList<>());
+        repfli.addElement(toAdd);
+        return entry;
+    }
+
+    public FlightReservationDTO updateFlight(FlightReservationDTO entry, String id){
+        Flights toAdd = Swapper.flightsFromDTO(entry);
+        toAdd.setReservations(new ArrayList<>());
+        repfli.update(toAdd);
+        return entry;
+    }
+
+    public FlightReservationDTO updateFlightRes(FlightReservationDTO entry, String id){
+        Reservations toAdd = Swapper.fliResFromDTO(entry);
+        repRes.update(toAdd);
+        return entry;
+    }
+
+    public void deleteFlight(String flightNumber) {
+        repfli.delete(flightNumber);
+    }
+
+    public List<FlightReservationDTO> getFlightReservations() {
+        List<Flights> flights = repfli.findAll();
+        List<FlightReservationDTO> flightsToReturn = new ArrayList<>();
+        for(Flights f : flights) {
+            flightsToReturn.add(Swapper.flightToDTO(f));
+        }
+        return flightsToReturn;
+    }
+
+
 }
